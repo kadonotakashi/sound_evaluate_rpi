@@ -123,7 +123,7 @@ class UMC404_PLAY_RPI():
 
 def main():
     DeviceOut = UMC404_PLAY_RPI()
-    DeviceOut.SetFileName('./sound/sayaka32k.wav')
+    DeviceOut.SetFileName('./sound/sayaka44k.wav')
     DeviceOut.PLAY()
 
 
