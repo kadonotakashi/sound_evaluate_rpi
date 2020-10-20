@@ -4,7 +4,7 @@
 #   Linux(RPi)では、ドライバが用意されておらず、4chの入出力として扱う必要がある。
 #   Audacity等で2CHのWAVEファイルを出力すると、CH1-2から出力される。
 #   RPi専用にスクリプトを書き直す。
-#
+#   sample rate is only 44.1kHz.     can not play 16kHz,32kHz
 #   環境音と評価音を同時に発音するためには、USB AudioI/Fを2系統用意する必要がある。
 #
 #
@@ -18,7 +18,7 @@ import time
 class UMC404_PLAY_RPI():
 
     def __init__(self):
-        self.devindex = -1
+        self.devindex_12 = -1
         self.fname = 'snd.wav'
 
         self.ch12 = 2
@@ -47,7 +47,7 @@ class UMC404_PLAY_RPI():
         for i in range(0, numdevices):
             name = self.p.get_device_info_by_host_api_device_index(0, i).get('name')
             if("UMC404HD" in name):
-                if (self.p.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
+                if (self.p.get_device_info_by_host_api_device_index(0, i).get('maxOutputChannels')) > 0:
                     self.devindex_12 = i
 
     def PLAY(self):
@@ -123,7 +123,7 @@ class UMC404_PLAY_RPI():
 
 def main():
     DeviceOut = UMC404_PLAY_RPI()
-    DeviceOut.SetFileName('./sound/stereo_nisseki_x4.wav')
+    DeviceOut.SetFileName('./sound/sayaka32k.wav')
     DeviceOut.PLAY()
 
 

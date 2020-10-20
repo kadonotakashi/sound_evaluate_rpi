@@ -36,11 +36,10 @@ class CODAMA_PLAY():
         numdevices = info.get('deviceCount')
         for i in range(0, numdevices):
             name = self.p.get_device_info_by_host_api_device_index(0, i).get('name')
-#           if (name[0:15]) == "スピーカー (4- Yukai":
-#                self.devindex = i
             if("codama" in name):
                 if("Yukai" in name):
-                    self.devindex = i
+                    if (self.p.get_device_info_by_host_api_device_index(0, i).get('maxOutputChannels')) > 0:
+                        self.devindex = i
 
     def PLAY(self):
         self.p = pyaudio.PyAudio()
